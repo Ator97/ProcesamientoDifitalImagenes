@@ -1,4 +1,3 @@
-pkg load image
 
 originalImage = imread("corte.bmp");
 [rows, columns, numberOfColorChannels] = size(originalImage);

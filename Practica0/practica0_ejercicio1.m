@@ -11,7 +11,7 @@ allBlack = zeros(size(rgbImage, 1), size(rgbImage, 2), 'uint8');
 just_red = cat(3, redChannel, allBlack, allBlack);
 just_green = cat(3, allBlack, greenChannel, allBlack);
 just_blue = cat(3, allBlack, allBlack, blueChannel);
-o
+
 
 % Display them all.
 subplot(3, 3, 2);
