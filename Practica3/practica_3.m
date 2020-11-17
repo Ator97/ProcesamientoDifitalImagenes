@@ -30,7 +30,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%Actividad 4%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-i=im2double(imread('lenaTest1.jpg')); 
+i=im2double(imread('lenaTest1.png')); 
 i2= binomialCoef(11) .* binomialCoef(11)';
 
 i3=imfilter(i,i2,'conv');
