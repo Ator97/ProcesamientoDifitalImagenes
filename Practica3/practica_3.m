@@ -1,164 +1,66 @@
+%%%%%%%%%%%%%%%%%%%%E1
+%Carga de imagenes
+imgOriginal = imread("lenaTest1.png");
+imgOriginal = rgb2gray(imgOriginal);
+imgOriginal = im2double(imgOriginal);
+imgRuido    = imnoise(imgOriginal,"gaussian");
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%Actividad 1%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% i=im2double(imread('lenaTest1.jpg')); 
-% i2= binomialCoef(11) .* binomialCoef(11)';
-% i3=conv2(i,i2,'valid');
-% figure();
-% imshow(i3,[]);
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%Actividad 2%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% I=imread('lenaTest1.jpg');
-% I = fft2(I);
-% I=fftshift(I);
-% figure();
-% imshow(I)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%Actividad 3%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% i=im2double(imread('lenaTest1.jpg')); 
-% i2= binomialCoef(6) .* binomialCoef(6)';
-% 
-% i3=imfilter(i,i2,'circular','conv');
-% 
-% I = fft2(i3);
-% I=fftshift(I);
-% figure();
-% imshow(I)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%Actividad 4%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-i=im2double(imread('lenaTest1.png')); 
-i2= binomialCoef(11) .* binomialCoef(11)';
+%%%%%%%%%%%%%%%%%%%%E2
+%Generación de filtros paso bajas de bloque
+f3 = ones(3,3)/9;
+f5 = ones(5,5)/25;
+f7 = ones(7,7)/49;
+f11 = ones(11,11)/121;
 
-i3=imfilter(i,i2,'conv');
-I = fft2(i3);
-I=fftshift(I);
+%aplicación de filtros paso bajas de bloque Imagen Original
+imgOriginalF3 = filter2(f3,imgOriginal);
+imgOriginalF5 = filter2(f5,imgOriginal);
+imgOriginalF7 = filter2(f7,imgOriginal);
+imgOriginalF11 = filter2(f11,imgOriginal);
+
 figure();
-imshow(I)
+subplot(321);imshow(imgOriginal);title('Orginal');
+subplot(322);imshow(imgOriginalF3);title('3X3');
+subplot(323);imshow(imgOriginalF5);title('5X5');
+subplot(324);imshow(imgOriginalF7);title('7X7');
+subplot(325);imshow(imgOriginalF11);title('11X11');
 
+%aplicación de filtros paso bajas de bloque Imagen Con ruido
+imgRuidoF3 = filter2(f3,imgRuido);
+imgRuidoF5 = filter2(f5,imgRuido);
+imgRuidoF7 = filter2(f7,imgRuido);
+imgRuidoF11 = filter2(f11,imgRuido);
 
+figure();
+subplot(321);imshow(imgRuido);title('Con Ruido');
+subplot(322);imshow(imgRuidoF3);title('3X3');
+subplot(323);imshow(imgRuidoF5);title('5X5');
+subplot(324);imshow(imgRuidoF7);title('7X7');
+subplot(325);imshow(imgRuidoF11);title('11X11');
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%Codigo de prueba%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% % A = imread('mri.tif'); 
-% % A = im2double(A);
-% % fun = @(x) median(x(:));
-% % B = nlfilter(A,[11 11],fun); 
-% % length(B)
-% % montage({A,B})
-% % title('Original Image (Left) and Median Filtered Image (Right)')
-
-% % % % % I=imread('lenaTest1.jpg');
-% % % % % 
-% % % % % l = binomialCoef(10) .* binomialCoef(10)';
-% % % % % 
-% % % % % figure();
-% % % % % imshow(I);
-% % % % % title('Imagen original');
-% % % % % 
-% % % % % %%l(512,512)=0;
-% % % % % %%l=uint8(l);
-% % % % % figure();
-% % % % % imagesc(l);
-% % % % % title('Imagen filtro');
-% % % % % c=conv2(l,I, 'full');
-% % % % % %%c=l.*I;
-% % % % % length(c)
-% % % % % figure();
-% % % % % imshow(c);
-% % % % % title('Imagen final');
-
-%I=imread('lenaTest1.jpg');
-%I = rgb2gray(I);
-% figure();
-% imshow(I);
-% title('Imagen');
-% I = fft2(I);
-% I=fftshift(I);
-% figure();
-% imshow(I);
-% title('Imagen fft2 y fftshift');
-% I=log2(I);
-% I=abs(I);
-% 
-% 
-% l = binomialCoef(11) .* binomialCoef(11)';
-% X = fft2(l);
-% 
-% X = abs(X);
-% figure();
-% imagesc(fftshift(X));
-% title('Imagen Coef');
-% %%imagesc(fftshift(X));
-% 
-% figure();
-% subplot(1,1,1);
-% m = conv2(I,X);
-% imagesc(m);
-% title('Imagen conv2');
-% 
-% Img=I.*m;
-% figure();
-% subplot(1,1,1);
-% Img(Img);
-% title('Imagen conv2');
-
-
-% % grayImage = imread('lenaTest1.jpg');
-% % grayImage = double(grayImage);
-% % subplot(2,3,1);
-% % imshow(grayImage, []);
-% % axis on;
-% % title('Original Image', 'FontSize', 15);
-% % myfilter = fspecial('gaussian',[3 3], 0.5);
-% % subplot(2,3,2);
-% % imshow(myfilter, []);
-% % axis on;
-% % title('myFilter', 'FontSize', 15);
-% % a = imfilter(grayImage, myfilter);
-% % subplot(2,3,3);
-% % imshow(a, []);
-% % axis on;
-% % title('a', 'FontSize', 15);
-% % b = imsharpen(grayImage,'Radius',0.5);
-% % subplot(2,3,4);
-% % imshow(b, []);
-% % axis on;
-% % title('b', 'FontSize', 15);
-% % c=conv2(a,b, 'full');
-% % subplot(2,3,5);
-% % imshow(c, []);
-% % title('c', 'FontSize', 15);
-% % axis on;
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Coeficiente binomial
-function retval=binomialCoef(n)
-  l=[];
-  for i = 0:n
-    l=[l,binomial(n,i)];
-  end
-  retval = l;
+%%%%%%%%%%%%%%%%%%%%E3
+function [triangulo,filtoOriginal,factorN,filtroNormalizado] = B(L)
+x = [1:L+1];
+for i=0 : L
+x(i+1) = factorial(L)/(factorial(L-i)*factorial(i));
+end
+triangulo = x;
+filtoOriginal = triangulo'*triangulo;
+factorN = sum(sum(filtoOriginal));
+filtroNormalizado = filtoOriginal/factorN;
 end
 
+%%%%%%%%%%%%%%%%%%%%E4
+%Gaussiano
+B = imgaussfilt(A,'FilterSize',3);
+B = imgaussfilt(A,'FilterSize',5);
+B = imgaussfilt(A,'FilterSize',7);
+B = imgaussfilt(A,'FilterSize',11);
 
-% Binomial
-function retval=binomial(n,k)
-  retval = fact(n) / (fact(n-k) * fact(k));
-end
+%Prewitt en la dirección X 
+h = fspecial('prewitt');
 
-function retval = fact (n)
-  if (n > 0)
-    retval=n*fact(n-1);
-  else
-    retval=1;
-  end
-end
+
 
 
 
